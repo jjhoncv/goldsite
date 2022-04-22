@@ -29,7 +29,7 @@ build:
 		npm run build		
 
 
-dev:network
+start:network
 	@export NETWORK_NAME="$(NETWORK_NAME)" \
 	PROJECT_NAME="$(PROJECT_NAME)" && \
 		docker-compose up -d

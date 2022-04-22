@@ -4,12 +4,19 @@ const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+class ServerMiniCssExtractPlugin extends MiniCssExtractPlugin {
+  getCssChunkObject(mainChunk) {
+    return {};
+  }
+}
+
 const browserConfig = {
+  devtool: "source-map",
   mode: "development",
   entry: "./src/browser.tsx",
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "browser.js",
+    path: path.resolve(__dirname, "dist"),
+    filename: "statics/js/browser.js",
     publicPath: "/",
   },
   resolve: {
@@ -44,7 +51,15 @@ const browserConfig = {
 
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "/static/css",
+            },
+          },
+          "css-loader",
+        ],
       },
     ],
   },
@@ -54,12 +69,16 @@ const browserConfig = {
     //   fileName: path.resolve(__dirname, "./build/manifest.json"),
     //   filter: (file) => file.isInitial,
     // }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "statics/css/[name].css",
+    }),
     new webpack.DefinePlugin({
       __isBrowser__: "true",
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src/public/index.html"),
+      filename: "template.html",
+      template: path.join(__dirname, "src/public/template.html"),
+      favicon: path.join(__dirname, "src/public/favicon.ico"),
     }),
   ],
 };
@@ -70,7 +89,7 @@ const serverConfig = {
   target: "node",
   externals: [nodeExternals()],
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "dist"),
     filename: "server.js",
   },
   resolve: {
@@ -100,12 +119,22 @@ const serverConfig = {
       // { test: /\.(js)$/, use: "babel-loader" },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          {
+            loader: ServerMiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "/static/css",
+            },
+          },
+          "css-loader",
+        ],
       },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "statics/css/[name].css",
+    }),
     new webpack.DefinePlugin({
       __isBrowser__: "false",
     }),

@@ -1,21 +1,21 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-// import { Root } from "./Root";
+import { QueryClient } from "react-query";
+
 import { App } from "./App";
+import { RootRouter } from "./RootRouter";
+import { routesRoot } from "./routesRoot";
 
 const dehydratedState = (window as any).__REACT_QUERY_STATE__;
 
 const queryClient = new QueryClient();
 
-ReactDOM.hydrate(
-  <QueryClientProvider client={queryClient}>
-    <Hydrate state={dehydratedState}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Hydrate>
-  </QueryClientProvider>,
+ReactDOM.render(
+  <App queryClient={queryClient} state={dehydratedState}>
+    <BrowserRouter>
+      <RootRouter routes={routesRoot} />
+    </BrowserRouter>
+  </App>,
   document.getElementById("app")
 );
