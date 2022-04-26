@@ -11,3 +11,6 @@ Site
 - Contact page
 - Product page
 - Not Found page
+
+darle permisos 777 al archivo
+sudo chmod 777 wait-for-it.sh

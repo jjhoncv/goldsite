@@ -1,2 +1,4 @@
 node_modules
 app/build
+app/dist
+docker/mysql/data

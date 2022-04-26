@@ -1,29 +1,57 @@
-{
-  "compilerOptions": {
-    // "target": "ESNext",
-    "module": "commonjs",
-    // "lib": [
-    //   "ES2015",
-    //   "ES2016",
-    //   "ES2017",
-    //   "ES2018",
-    //   "ES2019",
-    //   "ES2020",
-    //   "ESNext",
-    //   "dom"
-    // ],
-    "jsx": "react",
-    // "noEmit": true,
-    // "sourceMap": true,
-    // /* Strict Type-Checking Options */
-    // "strict": true,
-    // "noImplicitAny": true,
-    // "strictNullChecks": true,
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "module": "commonjs",
+//     "lib": [
+//       "ES2015",
+//       "ES2016",
+//       "ES2017",
+//       "ES2018",
+//       "ES2019",
+//       "ES2020",
+//       "ESNext",
+//       "dom"
+//     ],
+//     "jsx": "react",
+//     // "noEmit": true,
+//     // "sourceMap": true,
+//     /* Strict Type-Checking Options */
+//     // "strict": true,
+//     // "noImplicitAny": true,
+//     // "strictNullChecks": true,
 
-    // /* Module Resolution Options */
-    // "moduleResolution": "node",
-    // "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+//     /* Module Resolution Options */
+//     "moduleResolution": "node",
+//     // "forceConsistentCasingInFileNames": true,
+//     "esModuleInterop": true
+//   },
+//   "include": ["src"]
+// }
+
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "baseUrl": "./src",
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+    // "paths": {
+    //   "*": ["shared/*", "client/*", "server/*", "*"]
+    // }
   },
-  "include": ["src"]
+  "include": ["src", "./declaration.d.ts"]
 }
